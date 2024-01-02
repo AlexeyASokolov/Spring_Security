@@ -1,62 +1,49 @@
 package ru.sokolov.springBootSecurity.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import ru.sokolov.springBootSecurity.model.Role;
 import ru.sokolov.springBootSecurity.model.User;
 import ru.sokolov.springBootSecurity.service.RoleService;
 import ru.sokolov.springBootSecurity.service.UserService;
-import ru.sokolov.springBootSecurity.service.UserServiceImpl;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
+
     @Autowired
-    public AdminController(UserServiceImpl userService, RoleService roleService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
-    //ALL
     @GetMapping(value = "/")
     public String getAllUsers(ModelMap model, Principal principal) {
-        User user = userService.findByUserName(principal.getName());
+        User user = userService.findByUserEmail(principal.getName());
         model.addAttribute("user", user);
         List<User> listOfUsers = userService.getAllUsers();
         model.addAttribute("listOfUsers", listOfUsers);
         return "users";
     }
 
-    // CREATE
-    @GetMapping("/new")
-    public String CreateUserForm(ModelMap model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        Collection<Role> roles = roleService.getRoles();
-        model.addAttribute("role", roles);
-        return "userCreate";
-    }
-
     @PostMapping("/")
     public String addUser(@ModelAttribute("user") @Valid User user) {
         userService.addUser(user);
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(user.getRoles().stream().map(role -> roleService.findById(role.getId())).collect(Collectors.toSet()));
+        userService.updateUser(user);
         return "redirect:/admin/";
-    }
-
-    // UPDATE
-    @GetMapping("/{id}/update")
-    public String getEditUserForm(ModelMap model, @PathVariable("id") Long id) {
-        model.addAttribute("user", userService.getUser(id));
-        return "userUpdate";
     }
 
     @PatchMapping("/{id}")
@@ -65,7 +52,6 @@ public class AdminController {
         return "redirect:/admin/";
     }
 
-    // DELETE
     @DeleteMapping("/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.removeUser(id);

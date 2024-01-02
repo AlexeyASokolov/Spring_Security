@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
+
 
 @Entity
 @EqualsAndHashCode
@@ -30,21 +32,24 @@ public class User implements UserDetails {
     @Column(name = "age")
     private Long age;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @Column(name = "email")
+    private String email;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Collection<Role> roles;
-
+    private Set<Role> roles;
 
     public User() {
     }
 
-    public User(String name, String lastName, Long age) {
+    public User(String name, String lastName, Long age, String email) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
+        this.email = email;
     }
 
     public Long getId() {
@@ -117,12 +122,32 @@ public class User implements UserDetails {
         this.age = age;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 
-    public Collection<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+               "id=" + id +
+               ", password='" + password + '\'' +
+               ", name='" + name + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", age=" + age +
+               ", email='" + email + '\'' +
+               ", roles=" + roles +
+               '}';
+    }
 }
