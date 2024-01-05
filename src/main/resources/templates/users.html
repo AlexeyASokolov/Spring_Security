@@ -30,7 +30,7 @@
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1" th:text="${user.getName} + ' with role: ' + ${#strings.arrayJoin(user.getRoles(), ', ')}"></span>
+        <span class="navbar-brand mb-0 h1" th:text="${user.getName} + ' with role: ' + ${#strings.replace(#strings.arrayJoin(user.getRoles(), ', '), 'ROLE_', '')}"></span>
 
         <a class="btn btn-dark" aria-current="page" th:href="@{/logout}">Logout</a>
     </div>
