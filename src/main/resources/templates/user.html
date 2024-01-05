@@ -61,7 +61,9 @@
                             <td><p th:text="${user.getLastName()}"></p></td>
                             <td><p th:text="${user.getAge()}"></td>
                             <td><p th:text="${user.getEmail()}"></td>
-                            <td><p th:text="${user.getRoles().replaceAll('^ROLE_', '')}"></p></td>
+                            <td>
+                                <p th:each="role : ${user.getRoles()}" th:text="${#strings.removePrefix(role, 'ROLE_')}"></p>
+                            </td>
                         </tr>
                         </tbody>
                     </table>

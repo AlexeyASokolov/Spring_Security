@@ -95,7 +95,7 @@
                                     <td th:text="${user.getLastName}"></td>
                                     <td th:text="${user.getAge}"></td>
                                     <td th:text="${user.getEmail()}"></td>
-                                    <td th:text="${user.getRoles().toString().replace('[','').replace(']','')}"></td>
+                                    <td th:text="${#strings.replace(user.getRoles().toString(), '[','').replace(']','').replace('ROLE_', '')}"></td>
                                     <td>
                                         <!--UPDATE -->
                                         <button class="btn btn-info" data-bs-toggle="modal"
@@ -340,7 +340,7 @@
                                 <td th:text="${user.getLastName}"></td>
                                 <td th:text="${user.getAge}"></td>
                                 <td th:text="${user.getEmail()}"></td>
-                                <td th:text="${user.getRoles().toString().replace('[','').replace(']','')}"></td>                            </tr>
+                                <td th:text="${#strings.replace(user.getRoles().toString(), '[','').replace(']','').replace('ROLE_', '')}"></td>
                             </tbody>
                         </table>
                     </div>
