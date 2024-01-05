@@ -30,10 +30,8 @@
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"
-                  th:text="${user.getName} + '  with role:  ' + ${user.getRoles()}">
-                th:text=""
-            </span>
+        <span class="navbar-brand mb-0 h1" th:text="${user.getName} + ' with role: ' + ${#strings.arrayJoin(user.getRoles(), ', ')}"></span>
+
         <a class="btn btn-dark" aria-current="page" th:href="@{/logout}">Logout</a>
     </div>
 </nav>
@@ -97,7 +95,7 @@
                                     <td th:text="${user.getLastName}"></td>
                                     <td th:text="${user.getAge}"></td>
                                     <td th:text="${user.getEmail()}"></td>
-                                    <td th:text="${user.getRoles()}"></td>
+                                    <td th:text="${user.getRoles().toString().replace('[','').replace(']','')}"></td>
                                     <td>
                                         <!--UPDATE -->
                                         <button class="btn btn-info" data-bs-toggle="modal"
@@ -342,8 +340,7 @@
                                 <td th:text="${user.getLastName}"></td>
                                 <td th:text="${user.getAge}"></td>
                                 <td th:text="${user.getEmail()}"></td>
-                                <td th:text="${user.getRoles()}"></td>
-                            </tr>
+                                <td th:text="${user.getRoles().toString().replace('[','').replace(']','')}"></td>                            </tr>
                             </tbody>
                         </table>
                     </div>
