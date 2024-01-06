@@ -10,11 +10,11 @@ import ru.sokolov.springBootSecurity.dao.UserDaoImpl;
 import java.security.Principal;
 
 @Controller
-public class UserController {
+public class UserControllerRest {
     private final UserDaoImpl userDaoImpl;
 
     @Autowired
-    public UserController(UserDaoImpl userDaoImpl) {
+    public UserControllerRest(UserDaoImpl userDaoImpl) {
         this.userDaoImpl = userDaoImpl;
     }
 

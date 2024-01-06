@@ -17,12 +17,12 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminControllerRest {
     private final UserService userService;
     private final RoleService roleService;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminControllerRest(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
