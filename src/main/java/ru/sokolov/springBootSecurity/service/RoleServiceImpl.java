@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService {
+
     private final RoleDao roleDao;
 
     @Autowired
@@ -24,5 +25,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role findById(Long id) {
         return roleDao.findById(id);
+    }
+
+    @Override
+    public void addRole(Role role) {
+        roleDao.addRole(role);
     }
 }

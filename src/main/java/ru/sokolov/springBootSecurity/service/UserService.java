@@ -5,6 +5,7 @@ import ru.sokolov.springBootSecurity.model.User;
 import java.util.List;
 
 public interface UserService {
+
     User findByUserEmail(String email);
 
     User getUser(Long id);
