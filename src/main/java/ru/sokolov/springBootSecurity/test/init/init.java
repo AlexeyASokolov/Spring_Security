@@ -44,7 +44,7 @@ public class init implements ApplicationListener<ContextRefreshedEvent> {
         User admin = new User();
         admin.setUsername("admin");
         admin.setLastname("admin");
-        admin.setAge((byte) 30);
+        admin.setAge((byte) 25);
         admin.setEmail("admin@mail.ru");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRoles(adminRoles);
@@ -53,7 +53,7 @@ public class init implements ApplicationListener<ContextRefreshedEvent> {
         User user = new User();
         user.setUsername("user");
         user.setLastname("user");
-        user.setAge((byte) 20);
+        user.setAge((byte) 23);
         user.setEmail("user@mail.ru");
         user.setPassword(passwordEncoder.encode("user"));
         user.setRoles(userRoles);
