@@ -1,8 +1,6 @@
 package ru.sokolov.springBootSecurity.model;
 
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,7 +9,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 
 @EqualsAndHashCode
@@ -145,5 +142,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }

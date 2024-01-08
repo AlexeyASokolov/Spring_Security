@@ -29,7 +29,7 @@ function getAllUsers() {
                         <td>
                           <button type="button"
                           class="btn btn-info"
-                          data-bs-toogle="modal"
+                          data-bs-toggle="modal"
                           data-bs-target="#editModal"
                           onclick="editModal(${user.id})">
                                 Edit
@@ -40,7 +40,7 @@ function getAllUsers() {
                         <td>
                             <button type="button" 
                             class="btn btn-danger" 
-                            data-toggle="modal" 
+                            data-bs-toggle="modal" 
                             data-target="#deleteModal" 
                             onclick="deleteModal(${user.id})">
                                 Delete

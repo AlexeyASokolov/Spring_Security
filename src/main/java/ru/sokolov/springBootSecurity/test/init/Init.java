@@ -15,13 +15,13 @@ import java.util.List;
 
 
 @Component
-public class init implements ApplicationListener<ContextRefreshedEvent> {
+public class Init implements ApplicationListener<ContextRefreshedEvent> {
 
     private RoleServiceImpl roleService;
     private UserServiceImpl userService;
     private PasswordEncoder passwordEncoder;
     @Autowired
-    public init(RoleServiceImpl roleService, UserServiceImpl userService, PasswordEncoder passwordEncoder) {
+    public Init(RoleServiceImpl roleService, UserServiceImpl userService, PasswordEncoder passwordEncoder) {
         this.roleService = roleService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;

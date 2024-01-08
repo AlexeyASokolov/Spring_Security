@@ -32,14 +32,14 @@ public class AdminControllerRest {
         this.roleService = roleService;
     }
 
-    @GetMapping(value = "/")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
-    }
-
     @GetMapping("/showAccount")
     public ResponseEntity<User> showInfoUser(Principal principal) {
         return ResponseEntity.ok(userService.findByUserEmail(principal.getName()));
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/roles")
@@ -80,4 +80,5 @@ public class AdminControllerRest {
         userService.removeUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }
